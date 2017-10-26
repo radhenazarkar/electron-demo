@@ -1,7 +1,7 @@
 const path = require('path');
 const url = require('url');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 
 require('electron-debug')({ enabled: true });
 const {
@@ -11,6 +11,7 @@ const {
 
 
 let mainWindow = null;
+let isQuitting;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -63,6 +64,25 @@ const createWindow = () => {
 
   mainWindow.on('close', e => {
     console.log('mainwindow close event called');
+    if (!isQuitting) {
+      e.preventDefault();
+      if (process.platform === 'darwin') {
+        app.hide();
+      } else {
+        mainWindow.hide();
+      }
+    } else {
+      var choice = dialog.showMessageBox({
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        message: 'Are you sure you want to quit?',
+        detail: `Your custom detail message`,
+      });
+      if (choice == 1) {
+        isQuitting = false;
+        e.preventDefault();
+      }
+    }
   });
 
   mainWindow.on('closed', (e) => {
@@ -99,4 +119,8 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+app.on('before-quit', () => {
+  isQuitting = true;
 });
