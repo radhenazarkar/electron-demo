@@ -3,6 +3,13 @@ const url = require('url');
 
 const { app, BrowserWindow } = require('electron');
 
+require('electron-debug')({ enabled: true });
+const {
+  default:devtoolsInstaller, ANGULARJS_BATARANG,
+  REACT_DEVELOPER_TOOLS, EMBER_INSPECTOR,
+  BACKBONE_DEBUGGER, VUEJS_DEVTOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+
+
 let mainWindow = null;
 
 const createWindow = () => {
@@ -62,6 +69,10 @@ const createWindow = () => {
     console.log('mainwindow closed event called');
     mainWindow = null;
   });
+
+  devtoolsInstaller(REACT_DEVELOPER_TOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
 
 }
 

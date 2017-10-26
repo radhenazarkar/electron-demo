@@ -7,9 +7,13 @@
     "start": "electron ."
   },
   "devDependencies": {
+    "devtron": "^1.4.0",
     "electron": "^1.6.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "electron-debug": "^1.4.0",
+    "electron-devtools-installer": "^2.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/radhenazarkar/electron-demo.git"
