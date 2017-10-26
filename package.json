@@ -4,7 +4,9 @@
   "description": "",
   "main": "main/main.js",
   "scripts": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "electron": "1.6.2"
+  },
   "dependencies": {},
   "repository": {
     "type": "git",
