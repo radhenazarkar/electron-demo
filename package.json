@@ -1,0 +1,19 @@
+{
+  "name": "electron-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main/main.js",
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radhenazarkar/electron-demo.git"
+  },
+  "author": "radhenazarkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radhenazarkar/electron-demo/issues"
+  },
+  "homepage": "https://github.com/radhenazarkar/electron-demo#readme"
+}
