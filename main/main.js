@@ -20,6 +20,49 @@ const createWindow = () => {
   )
   // mainWindow.loadURL("http://www.google.com");
 
+
+  mainWindow.on('focus', (e) => {
+    console.log('mainwindow focus event called');
+  });
+
+  mainWindow.on('blur', (e) => {
+    console.log('mainwindow blur event called');
+  });
+
+  mainWindow.on('move', (e) => {
+    console.log('mainwindow move event called');
+  });
+
+  mainWindow.on('minimize', (e) => {
+    console.log('mainwindow minimize event called');
+  });
+
+
+  // mainWindow.on('maximize', (e) => {
+  //   console.log('mainwindow maximize event called');
+  // });
+
+  mainWindow.on('resize', (e) => {
+    console.log('mainwindow resize event called');
+  });
+
+  mainWindow.on('show', e => {
+    console.log('mainwindow show event called');
+  });
+
+  mainWindow.on('hide', e => {
+    console.log('mainwindow hide event called');
+  });
+
+  mainWindow.on('close', e => {
+    console.log('mainwindow close event called');
+  });
+
+  mainWindow.on('closed', (e) => {
+    console.log('mainwindow closed event called');
+    mainWindow = null;
+  });
+
 }
 
 app.on('ready', () => {
