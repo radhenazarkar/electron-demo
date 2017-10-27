@@ -77,3 +77,14 @@ document.getElementById('callmainprocess').addEventListener('click', () => {
 ipcRenderer.on('logout-user', (event) => {
   alert("logout called from tray menu");
 });
+
+let count = 0;
+document.getElementById('notification1').addEventListener('click', () => {
+  count++;
+  const notification = new Notification(`File Downloaded ${count}`, {
+    body: `Notification body`,
+  });
+  notification.onclick = () => {
+    alert('Notification clicked');
+  }
+});
