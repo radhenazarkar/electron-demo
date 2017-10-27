@@ -4,6 +4,7 @@ const url = require('url');
 const { app, BrowserWindow, dialog } = require('electron');
 
 const ApplicationMenu = require('./menu');
+const ApplicationTray = require('./tray');
 
 require('electron-debug')({ enabled: true });
 const {
@@ -99,6 +100,9 @@ const createWindow = () => {
 
   const menu = new ApplicationMenu();
   menu.createMenu();
+
+  const trayIcon = new ApplicationTray();
+  trayIcon.createTray();
 
 }
 
