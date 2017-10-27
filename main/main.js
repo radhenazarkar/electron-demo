@@ -3,6 +3,8 @@ const url = require('url');
 
 const { app, BrowserWindow, dialog } = require('electron');
 
+const ApplicationMenu = require('./menu');
+
 require('electron-debug')({ enabled: true });
 const {
   default:devtoolsInstaller, ANGULARJS_BATARANG,
@@ -93,6 +95,10 @@ const createWindow = () => {
   devtoolsInstaller(REACT_DEVELOPER_TOOLS)
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log('An error occurred: ', err));
+
+
+  const menu = new ApplicationMenu();
+  menu.createMenu();
 
 }
 

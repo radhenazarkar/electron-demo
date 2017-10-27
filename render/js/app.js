@@ -1,5 +1,5 @@
 const { remote } = require('electron');
-const { dialog } = remote;
+const { dialog, Menu, MenuItem } = remote;
 
 document.getElementById('open').addEventListener('click', () => {
   dialog.showOpenDialog(fileNames => {
@@ -38,3 +38,32 @@ document.getElementById('message').addEventListener('click', () => {
 document.getElementById('error').addEventListener('click', () => {
     dialog.showErrorBox("Error", "This error box detail");
 });
+
+
+
+const initContextMenu = () => {
+  const menu = new Menu();
+
+  menu.append(new MenuItem ({
+     label: 'Context Item 1',
+     click() {
+        console.log('Context Item 1 clicked')
+     }
+  }))
+  menu.append(new MenuItem({label: 'Context Item 2', type: 'checkbox', checked: true}))
+  menu.append(new MenuItem({type: 'separator'}))
+  menu.append(new MenuItem ({
+     label: 'Context Item 3',
+     click() {
+        console.log('Context Item 3 clicked')
+     }
+  }))
+
+  window.addEventListener('contextmenu', (e) => {
+     e.preventDefault();
+     menu.popup(remote.getCurrentWindow())
+  }, false)
+}
+
+
+initContextMenu();
