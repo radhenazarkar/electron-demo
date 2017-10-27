@@ -1,4 +1,4 @@
-const { remote, ipcRenderer } = require('electron');
+const { remote, ipcRenderer, shell } = require('electron');
 const { dialog, Menu, MenuItem } = remote;
 
 document.getElementById('open').addEventListener('click', () => {
@@ -87,4 +87,12 @@ document.getElementById('notification1').addEventListener('click', () => {
   notification.onclick = () => {
     alert('Notification clicked');
   }
+});
+
+document.querySelectorAll('.external-link').forEach((el) => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    shell.beep();
+    shell.openExternal(e.target.href);
+  });
 });
