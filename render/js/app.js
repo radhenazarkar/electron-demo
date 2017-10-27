@@ -1,4 +1,4 @@
-const { remote } = require('electron');
+const { remote, ipcRenderer } = require('electron');
 const { dialog, Menu, MenuItem } = remote;
 
 document.getElementById('open').addEventListener('click', () => {
@@ -55,6 +55,7 @@ const initContextMenu = () => {
   menu.append(new MenuItem ({
      label: 'Context Item 3',
      click() {
+        ipcRenderer.send('called-from-context-menu');
         console.log('Context Item 3 clicked')
      }
   }))
@@ -67,3 +68,12 @@ const initContextMenu = () => {
 
 
 initContextMenu();
+
+document.getElementById('callmainprocess').addEventListener('click', () => {
+  ipcRenderer.send('call-main-process', 'this is first param', 2);
+});
+
+
+ipcRenderer.on('logout-user', (event) => {
+  alert("logout called from tray menu");
+});

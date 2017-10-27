@@ -1,7 +1,7 @@
 const path = require('path');
 const url = require('url');
 
-const { app, BrowserWindow, dialog } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 
 const ApplicationMenu = require('./menu');
 const ApplicationTray = require('./tray');
@@ -101,7 +101,7 @@ const createWindow = () => {
   const menu = new ApplicationMenu();
   menu.createMenu();
 
-  const trayIcon = new ApplicationTray();
+  const trayIcon = new ApplicationTray(mainWindow);
   trayIcon.createTray();
 
 }
@@ -133,4 +133,17 @@ app.on('activate', () => {
 
 app.on('before-quit', () => {
   isQuitting = true;
+});
+
+ipcMain.on('called-from-context-menu', () => {
+  console.log("called from context menu")
+})
+
+ipcMain.on('call-main-process', (event, param1, param2) => {
+  console.log(`${param1}, ${param2} received in main process call`);
+  dialog.showMessageBox({
+    buttons: ['Yes', 'No'],
+    message: 'Main process communication called',
+    detail: `lorum ipsum detail`,
+  });
 });

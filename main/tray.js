@@ -6,6 +6,10 @@ const APP_NAME = app.getName();
 const TRAY_ICON = path.join(__dirname, '/../assets/trayIcon.png');
 
 class ApplicationTray {
+  constructor(mainWindow) {
+    this.mainWindow = mainWindow;
+  }
+
   createTray() {
     const contextMenu = Menu.buildFromTemplate(this.getTrayMenu());
     const mainTray = new Tray(TRAY_ICON);
@@ -16,6 +20,8 @@ class ApplicationTray {
   }
 
   getTrayMenu() {
+    const mainWindow = this.mainWindow;
+    
     return [{
       label: 'Open Google.com',
       click() {},
@@ -28,7 +34,9 @@ class ApplicationTray {
       submenu: [
         {
           label: 'Logout',
-          click() {},
+          click() {
+            mainWindow.webContents.send('logout-user');
+          },
         },
       ]
     },
